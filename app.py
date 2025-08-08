@@ -17,7 +17,7 @@ def extract_text_from_pdf(pdf_path):
             text += page.get_text()
         pdf_content = text
 
-pdf_path = 'D:\Efti\Project\FENYX FEMME\PDF\AI_Women.pdf'
+pdf_path = 'D:\Efti\Git\FENYX-FEMME\pdfs\AI_Women.pdf'
 
 extract_text_from_pdf(pdf_path)
 
