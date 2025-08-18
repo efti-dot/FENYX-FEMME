@@ -20,8 +20,17 @@ class OpenAIConfig:
         :return: The generated AI response.
         """
         try:
-            system_prompt = "You are a calm, empathetic, and friendly wellness coach. Your responses should be short, thoughtful and supportive. " \
-                            "Your goal is to help users feel empowered and informed about their health, fitness, and emotional well-being."
+            system_prompt = """
+            You are a calm, empathetic, and friendly wellness coach. Your responses should be short, thoughtful, and supportive. Your goal is to help users feel empowered and informed about their health, fitness, and emotional well-being.
+
+            You should generate a response based on the scenarios and guidance from the provided PDF content. After each follow-up question, make sure to continue the conversation naturally, integrating the user's latest answer into the response.
+
+            - If the user has provided an answer (e.g., "Avoiding"), acknowledge their response and avoid repeating the same question.
+            - Ask for clarification only when the user's response is unclear or incomplete, using empathetic language.
+            - Provide a short suggestion or action for the user to take after completing each follow-up question.
+
+            Remember to guide the user with gentle and supportive suggestions. The tone should remain calm and empathetic, with responses that reflect the user’s needs, progress, and current situation.
+            """
             
             
             user_prompt = f"User's question: {prompt}"
@@ -54,7 +63,7 @@ class OpenAIConfig:
         :return: The generated FENYX insight.
         """
         try:
-            prompt = f"Not warm message or anything, Just Generate a small insight message for a user with cycle '{cycle}' and phase '{phase}'."
+            prompt = f"Generate a concise, informative insight for a user with cycle '{cycle}' and phase '{phase}', without offering suggestions, questions, or personal advice. Just provide a clear insight message."
 
             response = self.get_response(prompt, context=context)
 
@@ -75,10 +84,8 @@ class OpenAIConfig:
         :return: The generated goal-oriented response.
         """
         try:
-            
-            prompt = f"Generate a goal-based, descriptive answer for a user in the '{phase}' phase with cycle '{cycle}', focusing only on the goal of this phase (e.g., rising estrogen, mental clarity, rest, etc.). Avoid food suggestions, supplements, or specific actions unless they directly relate to the goal."
+            prompt = f"Not ask any type of question or warm message, Generate a goal-based, descriptive response for a user in the '{phase}' phase with cycle '{cycle}', emphasizing the key goals of this phase, such as hormonal changes, energy focus, or mental clarity. Avoid any food suggestions, supplements, or questions, and do not suggest any specific actions unless they directly relate to the goal of the phase."
 
-            
             response = self.get_response(prompt, context=context)
 
             return response
@@ -96,8 +103,7 @@ class OpenAIConfig:
         :return: The generated food suggestions.
         """
         try:
-            
-            prompt = f"Generate food suggestions for a user in the '{phase}' phase with cycle '{cycle}'. Focus on foods that support the body's needs during this phase, such as those rich in specific nutrients or beneficial for hormonal balance."
+            prompt = f"Generate a concise, narrative-style food suggestion for a user in the '{phase}' phase with cycle '{cycle}'. Describe the most beneficial foods for this phase. Also, mention which foods to avoid, with a short rationale. Keep the response focused, natural, and to the point. And remember that do not ask any question or specific actions unless they directly relate to the food suggestions."
             
             response = self.get_response(prompt, context=context)
             return response
@@ -115,8 +121,7 @@ class OpenAIConfig:
         :return: The generated supplement suggestions.
         """
         try:
-            
-            prompt = f"Generate supplement suggestions for a user in the '{phase}' phase with cycle '{cycle}'. Focus on supplements that support hormonal balance, energy levels, and overall well-being during this phase."
+            prompt = f"Generate a concise, narrative-style supplement suggestions for a user in the '{phase}' phase with cycle '{cycle}'. Focus on supplements based on pdf, that support hormonal balance, energy levels, and overall well-being during this phase and avoid any content which is not in pdf."
             
             response = self.get_response(prompt, context=context)
             return response
