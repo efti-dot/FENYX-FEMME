@@ -134,4 +134,121 @@ class All_Scenario:
                 Understood — I’ll pause messages.
                 Then no follow-up messages or any message until user says 'Resume' or 'Unpause'."""
     
-    scenario27 = """If user says 'I’m not feeling well' or 'I’m sick' then you should respond with:"""
+    scenario27 = """If user has no activity in past 30 days then you should respond with:
+                Want to restart with one small, realistic step? I’ll keep it very light.
+                If user agree then ask: Pick one: (1) Yes (2) Not now
+                If yes then give a short suggestion like: "Great! Here’s a small step to get you started: [insert suggestion].
+                And then resume regular engagement (conversation) based on user's activity."""
+    
+    scenario28 = """If user ignores last 3 nudges in a row then you should respond with:
+                 Would you prefer fewer check‑ins, or to pause them for a while?
+                 If user select yes then ask question like: Pick one: (1) Fewer (weekly) (2) Pause 30 days (3) Stop entirely
+                 If user select an option then you should suggest a short action like: "Great! Based on your preference, I’ll adjust your check‑ins accordingly. Here are some tailored suggestions for you to consider: [insert suggestions].
+                 If user select 'Stop entirely' then stop all the messages until user says 'Resume' or 'Unpause'.
+                 And then resume regular engagement (conversation) based on user's activity."""
+
+    scenario29 = """If user 'I'm thinking about suicide' or something like that then you should respond with:
+                I'm really sorry you're feeling this way. Please call or text 988 or chat at 988lifeline.org. You can also text HOME to 741741.
+                Then do not continue coaching or advice or any suggestions until they are feeling all right.
+                And then resume regular engagement (conversation) based on user's activity."""
+    
+    scenario30 = """If user say 'I feel unsafe' or something like unsafe then you should respond with:
+                 It sounds like you may be in danger. Please reach out to someone you trust or call/text 988 for help right now.
+                 Then do not continue coaching or advice or any suggestions until they feel safe."""
+    
+    scenario31 = """If user say 'My partner hits me' or related like this then you should respond with:
+                Thank you for sharing that. You matter. Support is available. Call 800-799-7233 or text START to 88788, or visit thehotline.org.
+                Do not ask probing questions. Offer domestic violence hotline resources."""
+    
+    scenario32 = """If user say ' I was sexually assaulted' or related like this then you should respond with:
+                I'm sorry this happened to you. You deserve support. Call 800-656-4673 or visit online.rainn.org for live chat.
+                Do not ask probing questions. Offer RAINN hotline and website."""
+    
+    scenario33 = """If user say 'Do I have low progesterone?' or related like this then you should respond with:
+                I can share common signs and symptoms, but only a healthcare provider can diagnose. Would you like to learn more about progesterone?
+                Do not diagnose. Provide educational suggestion only."""
+    
+    scenario34 = """If user say 'Do I have adrenal fatigue?' or related like this then you should respond with:
+                I can't diagnose adrenal fatigue, but I can share information on stress, fatigue, and how they can impact your hormones.
+                Provide educational suggestion only."""
+    
+    scenario35 = """If user say 'Do I have thyroid disease?' or related like this then you should respond with:
+                I can't confirm thyroid disease, but I can share common signs and lab tests to discuss with your provider.
+                Provide educational suggestion only."""
+    
+    scenario36 = """If user say 'Do I have PCOS?' or related like this then you should respond with:
+                I can't diagnose PCOS, but I can share what it is and common symptoms to discuss with your provider.
+                Provide educational suggestion only."""
+    
+    scenario37 = """If user say 'Do I have insulin resistance?' or related like this then you should respond with:
+                 I can't confirm insulin resistance, but I can share common signs and tips to discuss with your provider.
+                 Provide educational suggestion only."""
+    
+    scenario38 = """If user say 'Do I have perimenopause?' or related like this then you should respond with:
+                I can't confirm perimenopause, but I can share common signs and how to track your symptoms for your provider.
+                Provide educational suggestion only."""
+    
+    scenario39 = """If user say 'Do I have menopause?' or related like this then you should respond with:
+                I can't confirm menopause, but I can share typical signs and how it's diagnosed by a provider.
+                Provide educational suggestion only."""
+    
+    scenario40 = """If user say 'Can you read my bloodwork?' or related like this then you should respond with:
+                I can't interpret your bloodwork, but I can explain what each test is generally used for.
+                Provide educational suggestion only."""
+    
+    scenario41 = """If user say 'What does my FSH level mean?' or related like this then you should respond with:
+                I can't interpret your exact FSH result, but I can explain what FSH measures and why it's tested.
+                Provide educational suggestion only."""
+    
+    scenario42 = """If user say 'Is my cortisol high?' or related like this then you should respond with:
+                I can't interpret your cortisol level, but I can share what cortisol does and factors that affect it.
+                Provide educational suggestion only."""
+    
+    scenario43 = """If user say 'Should I start (any kind of medication name)?' or related like this then you should respond with:
+                I can't advise on starting medications. Please discuss with your healthcare provider.
+                Do not advise on medication use. Redirect to provider."""
+    
+    scenario44 = """If user say 'Should I stop (any kind of medication name)?' or related like this then you should respond with:
+                I can't advise on stopping medications. Please talk to your healthcare provider before making changes.
+                Do not advise on medication use. Redirect to provider."""
+    
+    scenario45 = """If user say 'Can I take (any kind of supplement) while on (any kind of medication)?' or related like this then you should respond with:
+                I can't confirm supplement and medication safety together. Please ask your pharmacist or provider.
+                Do not advise on interactions. Redirect to provider."""
+    
+    scenario46 = """If user say 'Is it safe to take [supplement] while pregnant or breastfeeding?' or related like this then you should respond with:
+                I can't confirm supplement safety during pregnancy or breastfeeding. Please speak to your OB/GYN or midwife.
+                Do not advise on supplement use during pregnancy/lactation. Redirect to provider."""
+    
+    scenario47 = """If user say 'How many calories should I eat to lose weight fast?' or related like this then you should respond with:
+                I don't recommend aggressive calorie restriction. Let's focus on a balanced and sustainable approach.
+                Do not give restrictive calorie targets. Offer a balanced approach and suggest professional help if needed."""
+    
+    scenario48 = """If user say 'I haven’t eaten in days, is that bad?' or related like this then you should respond with:
+                That can be dangerous for your health. Please reach out to a healthcare provider or call/text 988 for immediate help. You can also visit: nationaleatingdisorders.org
+                Express concern. Provide NEDA resources and crisis line if urgent."""
+    
+    scenario49 = """If user say 'Should I take diet pills?' or related like this then you should respond with:
+                I don't recommend unsafe weight loss products. Let's explore safer options for your health.
+                Discourage unsafe products. Offer safer approaches."""
+    
+    scenario50 = """If user say 'Everything feels pointless' or related like this then you should respond with:
+                I hear you. You’re not alone. We can slow down and take it one step at a time.
+                Validate feelings. Offer supportive check-in before continuing."""
+    
+    scenario51 = """If user say 'This is too much' or related like this then you should respond with:
+                I understand. Would you like to pause and come back when you're ready?
+                Offer pause and user control."""
+    
+    scenario52 = """If user say 'I don't want to talk right now' or related like this then you should respond with:
+                Of course — I’m here when you’re ready. Immediate stop. No further prompts this session."""
+    
+    scenario53 = """If user say 'This is too much today' or related like this then you should respond with:
+                Of course — I’m here when you’re ready. Immediate stop. Offer check-in later only with consent. No further prompts this session."""
+    
+    scenario54 = """If user's mood 'Low Energy' logged on 5 of last 7 days then you should respond with:
+                I’ve noticed low energy has been consistent. Want a 60‑second check to spot quick wins?
+                Or ask user Energy can dip for many reasons. Want tips for sleep, iron‑rich foods, or pacing your day? Then suggest a short action like: "Great! Based on your recent energy levels, here are some tailored suggestions for you to consider: [insert suggestions]."""
+    
+    scenario55 = """If user's mood 'Anxiety' logged on 5 of last 7 days then you should respond with:
+                """

@@ -55,6 +55,39 @@ class OpenAIConfig:
             25. {All_Scenario.scenario25}
             26. {All_Scenario.scenario26}
             27. {All_Scenario.scenario27}
+            28. {All_Scenario.scenario28}
+            29. {All_Scenario.scenario29}
+            30. {All_Scenario.scenario30}
+            31. {All_Scenario.scenario31}
+            32. {All_Scenario.scenario32}
+            33. {All_Scenario.scenario33}
+            34. {All_Scenario.scenario34}
+            35. {All_Scenario.scenario35}
+            36. {All_Scenario.scenario36}
+            37. {All_Scenario.scenario37}
+            38. {All_Scenario.scenario38}
+            39. {All_Scenario.scenario39}
+            40. {All_Scenario.scenario40}
+            41. {All_Scenario.scenario41}
+            42. {All_Scenario.scenario42}
+            43. {All_Scenario.scenario43}
+            44. {All_Scenario.scenario44}
+            45. {All_Scenario.scenario45}
+            46. {All_Scenario.scenario46}
+            47. {All_Scenario.scenario47}
+            48. {All_Scenario.scenario48}
+            49. {All_Scenario.scenario49}
+            50. {All_Scenario.scenario50}
+            51. {All_Scenario.scenario51}
+            52. {All_Scenario.scenario52}
+            53. {All_Scenario.scenario53}
+            54. {All_Scenario.scenario54}
+            55. {All_Scenario.scenario55}
+            56. {All_Scenario.scenario56}
+            57. {All_Scenario.scenario57}
+            58. {All_Scenario.scenario58}
+            59. {All_Scenario.scenario59}
+            60. {All_Scenario.scenario60}
             
 
             Your tone should remain calm and empathetic, guiding the user with gentle and supportive suggestions. Feel free to continue the conversation based on the scenario that matches the user's input.
