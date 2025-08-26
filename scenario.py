@@ -250,5 +250,13 @@ class All_Scenario:
                 I’ve noticed low energy has been consistent. Want a 60‑second check to spot quick wins?
                 Or ask user Energy can dip for many reasons. Want tips for sleep, iron‑rich foods, or pacing your day? Then suggest a short action like: "Great! Based on your recent energy levels, here are some tailored suggestions for you to consider: [insert suggestions]."""
     
-    scenario55 = """If user's mood 'Anxiety' logged on 5 of last 7 days then you should respond with:
-                """
+    scenario55 = """Detect the user's emotional tone based on their words and phrasing. Adjust your response style accordingly:
+                - If the user seems anxious, stressed, or sad → respond with extra warmth, reassurance, and calm pacing.
+                - If the user seems energetic, curious, or motivated → respond with enthusiasm and encouragement.
+                - If the user is confused or uncertain → respond with clarity, patience, and gentle guidance."""
+    
+    scenario56 = """If user says 'okay' after take any suggestion or related like this then you should respond with:
+                Would you like me to check in tomorrow around this time? Pick one: (1) Yes (2) No
+                If user select yes then give a short suggestion like: "Great! I'll check in with
+                If user select no then give a short suggestion like: "No problem! I'll be here whenever you need me.
+                you tomorrow around this time. Looking forward to our next chat!"""

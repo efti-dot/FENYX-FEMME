@@ -9,25 +9,19 @@ class OpenAIConfig:
         self.api_key = api_key
         self.model = model
         openai.api_key = self.api_key
+        self.conversation_history = [{"role": "system", "content": "You are a helpful wellness coach."}]
 
-    def get_response(self, prompt: str, temperature: float = 0.7, max_tokens: int = 150, context: str = None):
+    def get_response(self, prompt: str, history: list, context: str = None) -> str:
         """
-        Sends a request to OpenAI's API and returns the response, incorporating optional context (such as PDF content).
-        
-        :param prompt: The input prompt for the model.
-        :param temperature: Sampling temperature (default is 0.7).
-        :param max_tokens: Maximum number of tokens to generate (default is 150).
-        :param context: Optional context (e.g., PDF content) to provide for better responses.
-        :return: The generated AI response.
+        Sends a prompt to the OpenAI API and returns the response text.
+        Maintains conversation history for context.
         """
         try:
+
             system_prompt = f"""
-            You are a calm, empathetic, and friendly wellness coach. Your responses should be short, thoughtful, and supportive. Your goal is to help users feel empowered and informed about their health, fitness, and emotional well-being.
-
-            You should generate a response based on the scenarios and guidance from the provided information. After each follow-up question, make sure to continue the conversation naturally, integrating the user's latest answer into the response.
-
+            You are a calm, empathetic, and friendly wellness coach specializing in women's health and well-being. Your role is to guide users through physical, emotional, and lifestyle challenges with short, supportive, and thoughtful responses.
+            Your tone should be warm, non-judgmental, and empowering. You respond only to health and wellness-related topics (like women's cycle, phase etc.). If a user provides irrelevant, inappropriate, or unclear input, gently redirect them or ask for clarification. You do not speculate or respond to topics outside of wellness.
             Below are the scenarios to follow when interacting with users:
-
             1. {All_Scenario.scenario1}
             2. {All_Scenario.scenario2}
             3. {All_Scenario.scenario3}
@@ -84,35 +78,40 @@ class OpenAIConfig:
             54. {All_Scenario.scenario54}
             55. {All_Scenario.scenario55}
             56. {All_Scenario.scenario56}
-            57. {All_Scenario.scenario57}
-            58. {All_Scenario.scenario58}
-            59. {All_Scenario.scenario59}
-            60. {All_Scenario.scenario60}
-            
-
-            Your tone should remain calm and empathetic, guiding the user with gentle and supportive suggestions. Feel free to continue the conversation based on the scenario that matches the user's input.
+            If a user input does not match any predefined scenario, confidently respond using your understanding of wellness principles and the patterns learned from the provided scenarios. Use your best judgment to guide the user with empathy and clarity, as if the scenario were already known.
+            If no scenario applies, respond as a general wellness coach. Always prioritize clarity, empathy, and encouragement. If the user seems confused or misinformed, kindly help them reframe or correct their input.
+            Always maintain a supportive tone, but adapt your emotional energy to match the user's mood.
+            Your goal is to help women feel heard, supported, and informed about their health journey.
             """
-            
-            
-            user_prompt = f"User's question: {prompt}"
-            if context:
-                user_prompt += f"\n\nHere is some relevant information from the wellness guide:\n{context}"
 
-            final_prompt = f"{system_prompt}\n{user_prompt}"
+            full_system_prompt = system_prompt
+            if context:
+                full_system_prompt += f"\n\nHere is additional context from the wellness guide:\n{context}"
+
+            # Build API history separately
+            api_history = [{"role": "system", "content": full_system_prompt}] + history + [{"role": "user", "content": prompt}]
 
             response = openai.ChatCompletion.create(
                 model=self.model,
-                messages=[{"role": "user", "content": final_prompt}],
-                temperature=temperature,
-                max_tokens=max_tokens
+                messages=api_history
             )
 
-            return response['choices'][0]['message']['content']
+            reply = response.choices[0].message['content']
+
+            # Append only user and assistant messages to session history
+            history.append({"role": "user", "content": prompt})
+            history.append({"role": "assistant", "content": reply})
+
+            return reply
+
+
         except Exception as e:
             print(f"Error communicating with OpenAI API: {e}")
             return "Sorry, I couldn't process your request at the moment. Please try again later."
         
 
+    def get_history(self):
+        return self.conversation_history
 
     def generate_insight(self, cycle: str, phase: str, context: str):
         """
@@ -126,7 +125,7 @@ class OpenAIConfig:
         try:
             prompt = f"Generate a concise, informative insight for a user with cycle '{cycle}' and phase '{phase}', without offering suggestions, questions, or personal advice. Just provide a clear insight message."
 
-            response = self.get_response(prompt, context=context)
+            response = self.get_response(prompt, history=[], context=context)
 
             return response
         except Exception as e:
@@ -147,7 +146,7 @@ class OpenAIConfig:
         try:
             prompt = f"Not ask any type of question or warm message, Generate a goal-based, descriptive response for a user in the '{phase}' phase with cycle '{cycle}', emphasizing the key goals of this phase, such as hormonal changes, energy focus, or mental clarity. Avoid any food suggestions, supplements, or questions, and do not suggest any specific actions unless they directly relate to the goal of the phase."
 
-            response = self.get_response(prompt, context=context)
+            response = self.get_response(prompt, history=[], context=context)
 
             return response
         except Exception as e:
@@ -166,7 +165,7 @@ class OpenAIConfig:
         try:
             prompt = f"Generate a concise, narrative-style food suggestion for a user in the '{phase}' phase with cycle '{cycle}'. Describe the most beneficial foods for this phase. Also, mention which foods to avoid, with a short rationale. Keep the response focused, natural, and to the point. And remember that do not ask any question or specific actions unless they directly relate to the food suggestions."
             
-            response = self.get_response(prompt, context=context)
+            response = self.get_response(prompt, history=[], context=context)
             return response
         except Exception as e:
             print(f"Error generating food suggestions: {e}")
@@ -184,9 +183,8 @@ class OpenAIConfig:
         try:
             prompt = f"Generate a concise, narrative-style supplement suggestions for a user in the '{phase}' phase with cycle '{cycle}'. Focus on supplements based on pdf, that support hormonal balance, energy levels, and overall well-being during this phase and avoid any content which is not in pdf."
             
-            response = self.get_response(prompt, context=context)
+            response = self.get_response(prompt, history=[], context=context)
             return response
         except Exception as e:
             print(f"Error generating supplement suggestions: {e}")
             return "Sorry, I couldn't provide supplement suggestions at the moment. Please try again later."
-        
